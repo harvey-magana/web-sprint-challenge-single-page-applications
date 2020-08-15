@@ -40,11 +40,9 @@ const Button = styled.button`
   border-radius: 3px;
 `;
 
-const DropDownContainer = styled("div")``;
-const DropDownHeader = styled("div")``;
-const DropDownListContainer = styled("div")``;
-const DropDownList = styled("ul")``;
-const ListItem = styled("li")``;
+const DropDownContainer = styled.div``;
+const DropDownSelect = styled.select``;
+const DropDownOption = styled.option``;
 
 const Pizza = () => {
   return (
@@ -58,6 +56,15 @@ const Pizza = () => {
         </Link>
         <Form>
             <FormGroup>
+                <DropDownContainer>
+                    <Label htmlFor="pizza-select">Pizza Sizes</Label>
+                    <DropDownSelect>
+                        <DropDownOption value="">--Please choose a size--</DropDownOption>
+                        <DropDownOption value="small">Small</DropDownOption>
+                        <DropDownOption value="medium">Medium</DropDownOption>
+                        <DropDownOption value="large">Large</DropDownOption>
+                    </DropDownSelect>
+                </DropDownContainer>
                 <Label htmlFor="label">Name:</Label>
                 <Input id="label" name="name" />
                 <Label htmlFor="label">Email:</Label>
