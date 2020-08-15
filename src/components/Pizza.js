@@ -40,17 +40,34 @@ const Button = styled.button`
   border-radius: 3px;
 `;
 
+const DropDownContainer = styled("div")``;
+const DropDownHeader = styled("div")``;
+const DropDownListContainer = styled("div")``;
+const DropDownList = styled("ul")``;
+const ListItem = styled("li")``;
+
 const Pizza = () => {
   return (
-    <>
-      <h1>Build your own pizza</h1>
-      <Link to="/">
-        <div className="home-button">Home</div>
-      </Link>
-      <Link to="/pizza">
-        <div className="home-button">Pizza Form</div>
-      </Link>
-    </>
+    <div className="App">
+        <h1>Build your own pizza</h1>
+        <Link to="/">
+            <div className="home-button">Home</div>
+        </Link>
+        <Link to="/pizza">
+            <div className="home-button">Pizza Form</div>
+        </Link>
+        <Form>
+            <FormGroup>
+                <Label htmlFor="label">Name:</Label>
+                <Input id="label" name="name" />
+                <Label htmlFor="label">Email:</Label>
+                <Input id="label" name="email" />
+                <Label htmlFor="label">Role:</Label>
+                <Input id="label" name="role" />
+                <Button primary>Primary</Button>
+            </FormGroup>
+        </Form>
+    </div>
   );
 };
 export default Pizza;
