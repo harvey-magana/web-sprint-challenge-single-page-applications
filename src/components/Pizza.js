@@ -44,6 +44,26 @@ const DropDownContainer = styled.div``;
 const DropDownSelect = styled.select``;
 const DropDownOption = styled.option``;
 
+const Checkbox = styled.input`
+	padding: 0.5em;
+	color: #2196f3;
+	background: #2196f3;
+	border: none;
+	border-radius: 3px;
+	width: 30%;
+	margin-bottom: 0.5em;
+`;
+
+const ToppingsContainer = styled.div`
+    display: flex;
+`;
+
+const ToppingsTitle = styled.div`
+    margin-bottom: 0.5em;
+    color: #2196f3;
+    display: block;
+`;
+
 const Pizza = () => {
   return (
     <div className="App">
@@ -56,8 +76,8 @@ const Pizza = () => {
         </Link>
         <Form>
             <FormGroup>
+            <Label htmlFor="pizza-select">Pizza Sizes
                 <DropDownContainer>
-                    <Label htmlFor="pizza-select">Pizza Sizes</Label>
                     <DropDownSelect>
                         <DropDownOption value="">--Please choose a size--</DropDownOption>
                         <DropDownOption value="small">Small</DropDownOption>
@@ -65,6 +85,42 @@ const Pizza = () => {
                         <DropDownOption value="large">Large</DropDownOption>
                     </DropDownSelect>
                 </DropDownContainer>
+                </Label>
+                <ToppingsTitle>Toppings</ToppingsTitle>
+                <ToppingsContainer>
+                    <Label htmlFor="pepperoni">
+                    Pepperoni
+                    <Checkbox 
+                        id="pepperoni"
+                        type="checkbox"
+                        name="pepperoni"
+                    />
+                    </Label>
+                    <Label htmlFor="sausage">
+                    Susage
+                    <Checkbox 
+                        id="sausage"
+                        type="checkbox"
+                        name="sausage"
+                    />
+                    </Label>
+                    <Label htmlFor="mushrooms">
+                    Mushrooms
+                    <Checkbox 
+                        id="mushrooms"
+                        type="checkbox"
+                        name="mushrooms"
+                    />
+                    </Label>
+                    <Label htmlFor="peppers">
+                    Peppers
+                    <Checkbox 
+                        id="peppers"
+                        type="checkbox"
+                        name="peppers"
+                    />
+                    </Label>
+                </ToppingsContainer>
                 <Label htmlFor="label">Name:</Label>
                 <Input id="label" name="name" />
                 <Label htmlFor="label">Email:</Label>
