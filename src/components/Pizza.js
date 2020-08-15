@@ -77,10 +77,10 @@ const SpecialInstructions = styled.textarea`
 `;
 
 const Pizza = () => {
-    //state
+    //state **
     //validation
     //inputChange **
-    //formSubmit
+    //formSubmit **
     //useEffect
     //formSchema
     const [ formState, setFormState ] = useState({
@@ -94,7 +94,15 @@ const Pizza = () => {
         special_instructions: ''
     })
 
-    console.log(formState)
+    const [ pizzas, setPizzas ] = useState([])
+
+    const [ errors, setErrors ] = useState({
+        id: Date.now(),
+        name: '', 
+        email: '', 
+        password: '', 
+        terms: ''
+    });
 
     const inputChange = (e) => {
         e.persist();
@@ -110,6 +118,22 @@ const Pizza = () => {
     const formSubmit = (e) => {
         e.preventDefault();
         console.log("form submitted!");
+        axios
+            .post("https://reqres.in/api/users", formState)
+            .then((res) => {
+                console.log(res)
+                setPizzas(res.data)
+                setFormState({
+                    name: '', 
+                    sizes: '', 
+                    pepperoni: false,
+                    sausage: false,
+                    mushrooms: false,
+                    peppers: false,
+                    special_instructions: ''
+                })
+            })
+            .catch((err) => console.log(err.response));
     }
 
   return (
