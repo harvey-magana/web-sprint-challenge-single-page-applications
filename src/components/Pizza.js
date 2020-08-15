@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -81,6 +81,28 @@ const Pizza = () => {
     //formSubmit
     //useEffect
     //formSchema
+    const [ formState, setFormState ] = useState({
+        id: Date.now(),
+        name: '', 
+        sizes: '', 
+        pepperoni: false,
+        sausage: false,
+        mushrooms: false,
+        peppers: false,
+        special_instructions: ''
+    })
+
+    const inputChange = (e) => {
+        e.persist();
+        const newFormData = {
+            ...formState, 
+            [e.target.name]: e.target.type === "checkbox" ? e.target.checked : e.target.value 
+        }
+
+        //validation will go here...
+        setFormState(newFormData);
+    }
+
   return (
     <div className="App">
         <h1>Build your own pizza</h1>
@@ -92,9 +114,9 @@ const Pizza = () => {
         </Link>
         <Form>
             <FormGroup>
-            <Label htmlFor="pizza-select">Pizza Sizes
+            <Label htmlFor="sizes">Pizza Sizes
                 <DropDownContainer>
-                    <DropDownSelect>
+                    <DropDownSelect id="sizes" name="sizes" onChange={inputChange}>
                         <DropDownOption value="">--Please choose a size--</DropDownOption>
                         <DropDownOption value="small">Small</DropDownOption>
                         <DropDownOption value="medium">Medium</DropDownOption>
@@ -110,6 +132,8 @@ const Pizza = () => {
                         id="pepperoni"
                         type="checkbox"
                         name="pepperoni"
+                        onChange={inputChange} 
+                        value={formState.pepperoni}
                     />
                     </Label>
                     <Label htmlFor="sausage">
@@ -118,6 +142,8 @@ const Pizza = () => {
                         id="sausage"
                         type="checkbox"
                         name="sausage"
+                        onChange={inputChange} 
+                        value={formState.sausage}
                     />
                     </Label>
                     <Label htmlFor="mushrooms">
@@ -126,6 +152,8 @@ const Pizza = () => {
                         id="mushrooms"
                         type="checkbox"
                         name="mushrooms"
+                        onChange={inputChange} 
+                        value={formState.mushrooms}
                     />
                     </Label>
                     <Label htmlFor="peppers">
@@ -134,14 +162,26 @@ const Pizza = () => {
                         id="peppers"
                         type="checkbox"
                         name="peppers"
+                        onChange={inputChange} 
+                        value={formState.peppers}
                     />
                     </Label>
                 </ToppingsContainer>
-                <Label htmlFor="label">Name
-                    <Input id="label" name="name" />
+                <Label htmlFor="name">Name
+                    <Input 
+                        id="label" 
+                        name="name" 
+                        onChange={inputChange} 
+                        value={formState.name}
+                    />
                 </Label>
-                <Label htmlFor="label">Special-Instructions
-                    <SpecialInstructions></SpecialInstructions>
+                <Label htmlFor="special_instructions">Special-Instructions
+                    <SpecialInstructions
+                        id="special_instructions"
+                        name="special_instructions"
+                        onChange={inputChange} 
+                        value={formState.special_instructions}
+                    />
                 </Label>
                 <Button primary>Primary</Button>
             </FormGroup>
