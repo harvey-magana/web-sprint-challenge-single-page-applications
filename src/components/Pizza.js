@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import * as yup from 'yup';
+import axios from "axios";
 
 const Form = styled.form`
 	color: #2196f3;
