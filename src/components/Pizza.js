@@ -64,6 +64,16 @@ const ToppingsTitle = styled.div`
     display: block;
 `;
 
+const SpecialInstructions = styled.textarea`
+    padding: 0.5em;
+    color: #2196f3;
+    background: papayawhip;
+    border: none;
+    border-radius: 3px;
+    width: 100%;
+    margin-bottom: 0.5em;
+`;
+
 const Pizza = () => {
   return (
     <div className="App">
@@ -123,10 +133,9 @@ const Pizza = () => {
                 </ToppingsContainer>
                 <Label htmlFor="label">Name:</Label>
                 <Input id="label" name="name" />
-                <Label htmlFor="label">Email:</Label>
-                <Input id="label" name="email" />
-                <Label htmlFor="label">Role:</Label>
-                <Input id="label" name="role" />
+                <Label htmlFor="label">Special-Instructions
+                    <SpecialInstructions></SpecialInstructions>
+                </Label>
                 <Button primary>Primary</Button>
             </FormGroup>
         </Form>
