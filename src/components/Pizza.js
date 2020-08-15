@@ -77,7 +77,7 @@ const SpecialInstructions = styled.textarea`
 const Pizza = () => {
     //state
     //validation
-    //inputChange
+    //inputChange **
     //formSubmit
     //useEffect
     //formSchema
@@ -92,6 +92,8 @@ const Pizza = () => {
         special_instructions: ''
     })
 
+    console.log(formState)
+
     const inputChange = (e) => {
         e.persist();
         const newFormData = {
@@ -103,6 +105,11 @@ const Pizza = () => {
         setFormState(newFormData);
     }
 
+    const formSubmit = (e) => {
+        e.preventDefault();
+        console.log("form submitted!");
+    }
+
   return (
     <div className="App">
         <h1>Build your own pizza</h1>
@@ -112,7 +119,7 @@ const Pizza = () => {
         <Link to="/pizza">
             <div className="home-button">Pizza Form</div>
         </Link>
-        <Form>
+        <Form onSubmit={formSubmit}>
             <FormGroup>
             <Label htmlFor="sizes">Pizza Sizes
                 <DropDownContainer>
