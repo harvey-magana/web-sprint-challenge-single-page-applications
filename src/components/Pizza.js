@@ -75,6 +75,12 @@ const SpecialInstructions = styled.textarea`
 `;
 
 const Pizza = () => {
+    //state
+    //validation
+    //inputChange
+    //formSubmit
+    //useEffect
+    //formSchema
   return (
     <div className="App">
         <h1>Build your own pizza</h1>
@@ -131,8 +137,9 @@ const Pizza = () => {
                     />
                     </Label>
                 </ToppingsContainer>
-                <Label htmlFor="label">Name:</Label>
-                <Input id="label" name="name" />
+                <Label htmlFor="label">Name
+                    <Input id="label" name="name" />
+                </Label>
                 <Label htmlFor="label">Special-Instructions
                     <SpecialInstructions></SpecialInstructions>
                 </Label>
