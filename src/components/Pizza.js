@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Header from "./Header";
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import * as yup from 'yup';
@@ -174,6 +175,7 @@ const Pizza = () => {
 
   return (
     <div className="App">
+        <Header />
         <h1>Build your own pizza</h1>
         <Link to="/">
             <div className="home-button">Home</div>
@@ -261,7 +263,7 @@ const Pizza = () => {
                     />
                 {errors.special_instructions.length > 0 ? <p>{errors.special_instructions}</p> : null}
                 </Label>
-                <Button disabled={buttonDisabled} primary>Primary</Button>
+                <Button disabled={buttonDisabled} primary>Submit</Button>
             </FormGroup>
             <PostTitle>Here is what you ordered!</PostTitle>
             <pre>{JSON.stringify(pizzas, null, 2)}</pre>
