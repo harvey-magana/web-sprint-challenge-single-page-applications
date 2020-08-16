@@ -200,6 +200,7 @@ const Pizza = () => {
                         id="pepperoniInput"
                         type="checkbox"
                         name="pepperoni"
+                        data-cy="pepperoni"
                         checked={formState.pepperoni} 
                         onChange={inputChange} 
                     />
@@ -210,6 +211,7 @@ const Pizza = () => {
                         id="sausageInput"
                         type="checkbox"
                         name="sausage"
+                        data-cy="sausage"
                         checked={formState.sausage} 
                         onChange={inputChange} 
                     />
@@ -220,6 +222,7 @@ const Pizza = () => {
                         id="mushroomsInput"
                         type="checkbox"
                         name="mushrooms"
+                        data-cy="mushrooms"
                         checked={formState.mushrooms} 
                         onChange={inputChange} 
                     />
@@ -230,9 +233,9 @@ const Pizza = () => {
                         id="peppersInput"
                         type="checkbox"
                         name="peppers"
+                        data-cy="peppers"
                         checked={formState.peppers} 
                         onChange={inputChange} 
-                        value={formState.peppers}
                     />
                     </Label>
                 </ToppingsContainer>
@@ -240,6 +243,7 @@ const Pizza = () => {
                     <Input 
                         id="nameInput" 
                         name="name" 
+                        data-cy="name"
                         onChange={inputChange} 
                         value={formState.name}
                     />
@@ -249,6 +253,7 @@ const Pizza = () => {
                     <SpecialInstructions
                         id="special_instructionsInput"
                         name="special_instructions"
+                        data-cy="special_instructions"
                         onChange={inputChange} 
                         value={formState.special_instructions}
                     />
