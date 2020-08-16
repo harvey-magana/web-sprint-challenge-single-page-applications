@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import Footer from "./Footer"; 
+import Confirmation from "./Confirmation";
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import * as yup from 'yup';
@@ -265,8 +266,7 @@ const Pizza = () => {
                 </Label>
                 <Button disabled={buttonDisabled} primary>Submit</Button>
             </FormGroup>
-            <PostTitle>Here is what you ordered!</PostTitle>
-            <pre>{JSON.stringify(pizzas, null, 2)}</pre>
+            <Confirmation order={pizzas} />
         </Form>
         <Footer />
     </div>
