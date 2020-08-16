@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from "react";
 import Header from "./Header";
+import Footer from "./Footer"; 
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import * as yup from 'yup';
 import axios from "axios";
 
 const Form = styled.form`
-	color: #2196f3;
+	color: green;
     display: block;
 	width: 300px;
 	margin: 50px auto;
 `;
 
 const FormGroup = styled.div`
-	color: #2196f3;
+	color: green;
     display: block;
 	width: 300px;
 	margin: 50px auto;
@@ -21,13 +22,13 @@ const FormGroup = styled.div`
 
 const Label = styled.label`
 	margin-bottom: 0.5em;
-	color: #2196f3;
+	color: green;
     display: block;
 `;
 
 const Input = styled.input`
 	padding: 0.5em;
-	color: #2196f3;
+	color: green;
 	background: papayawhip;
 	border: none;
 	border-radius: 3px;
@@ -39,7 +40,7 @@ const Button = styled.button`
   font-size: 1em;
   margin: 1em;
   padding: 0.25em 1em;
-  border: 2px solid #2196f3;
+  border: 2px solid green;
   border-radius: 3px;
 `;
 
@@ -49,8 +50,8 @@ const DropDownOption = styled.option``;
 
 const Checkbox = styled.input`
 	padding: 0.5em;
-	color: #2196f3;
-	background: #2196f3;
+	color: green;
+	background: green;
 	border: none;
 	border-radius: 3px;
 	width: 30%;
@@ -63,13 +64,13 @@ const ToppingsContainer = styled.div`
 
 const ToppingsTitle = styled.div`
     margin-bottom: 0.5em;
-    color: #2196f3;
+    color: green;
     display: block;
 `;
 
 const SpecialInstructions = styled.textarea`
     padding: 0.5em;
-    color: #2196f3;
+    color: green;
     background: papayawhip;
     border: none;
     border-radius: 3px;
@@ -77,7 +78,12 @@ const SpecialInstructions = styled.textarea`
     margin-bottom: 0.5em;
 `;
 
-const PostTitle = styled.h3``;
+const PostTitle = styled.h3`
+    color: green;
+    display: block;
+    width: 300px;
+    margin: 50px auto;
+`;
 
 const Pizza = () => {
     const [ formState, setFormState ] = useState({
@@ -176,13 +182,7 @@ const Pizza = () => {
   return (
     <div className="App">
         <Header />
-        <h1>Build your own pizza</h1>
-        <Link to="/">
-            <div className="home-button">Home</div>
-        </Link>
-        <Link to="/pizza">
-            <div className="home-button">Pizza Form</div>
-        </Link>
+        <PostTitle>Build your own pizza</PostTitle>
         <Form onSubmit={formSubmit}>
             <FormGroup>
             <Label htmlFor="sizesInput">Pizza Sizes
@@ -268,6 +268,7 @@ const Pizza = () => {
             <PostTitle>Here is what you ordered!</PostTitle>
             <pre>{JSON.stringify(pizzas, null, 2)}</pre>
         </Form>
+        <Footer />
     </div>
   );
 };
