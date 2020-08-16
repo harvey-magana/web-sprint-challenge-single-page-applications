@@ -76,6 +76,8 @@ const SpecialInstructions = styled.textarea`
     margin-bottom: 0.5em;
 `;
 
+const PostTitle = styled.h3``;
+
 const Pizza = () => {
     const [ formState, setFormState ] = useState({
         id: Date.now(),
@@ -261,6 +263,8 @@ const Pizza = () => {
                 </Label>
                 <Button disabled={buttonDisabled} primary>Primary</Button>
             </FormGroup>
+            <PostTitle>Here is what you ordered!</PostTitle>
+            <pre>{JSON.stringify(pizzas, null, 2)}</pre>
         </Form>
     </div>
   );
