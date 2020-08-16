@@ -77,12 +77,6 @@ const SpecialInstructions = styled.textarea`
 `;
 
 const Pizza = () => {
-    //state **
-    //validation
-    //inputChange **
-    //formSubmit **
-    //useEffect
-    //formSchema
     const [ formState, setFormState ] = useState({
         id: Date.now(),
         name: '', 
@@ -96,13 +90,17 @@ const Pizza = () => {
 
     console.log(formState)
     const [ pizzas, setPizzas ] = useState([])
+    const [ buttonDisabled, setButtonDisabled ] = useState(true);
 
     const [ errors, setErrors ] = useState({
         id: Date.now(),
         name: '', 
-        email: '', 
-        password: '', 
-        terms: ''
+        sizes: '', 
+        pepperoni: false,
+        sausage: false,
+        mushrooms: false,
+        peppers: false,
+        special_instructions: ''
     });
 
     const validateChange = (e) => {
@@ -111,13 +109,13 @@ const Pizza = () => {
             .validate(e.target.value)
             .then((valid) => {
                 setErrors({
-                    name: event.target.value,
+                    ...errors,
                     [e.target.name]: ""
                 });
             })
             .catch((err) => {
                 setErrors({
-                    name: event.target.value,
+                    ...errors,
                     [e.target.name]: err.errors[0]
                 });
             });
@@ -157,15 +155,19 @@ const Pizza = () => {
     
     useEffect(() => {
         formSchema.isValid(formState).then((isValid) => {
+            console.log(formState)
             setButtonDisabled(!isValid)
         });
     }, [formState])
     
     const formSchema = yup.object().shape({
-        name: yup
-            .string()
-            .min(2, "Passwords must be at least 2 characters long.")
-            .required()
+        sizes: yup.string().oneOf(["small", "medium", "large"], "Please choose a size").required(),
+        pepperoni: yup.boolean(),
+        sausage: yup.boolean(),
+        mushrooms: yup.boolean(),
+        peppers: yup.boolean(),
+        name: yup.string().min(2, "Name must be at least 2 characters long.").required("Name is required"),
+        special_instructions: yup.string()
       });
 
   return (
@@ -179,52 +181,53 @@ const Pizza = () => {
         </Link>
         <Form onSubmit={formSubmit}>
             <FormGroup>
-            <Label htmlFor="sizes">Pizza Sizes
+            <Label htmlFor="sizesInput">Pizza Sizes
                 <DropDownContainer>
-                    <DropDownSelect id="sizes" name="sizes" onChange={inputChange} value={formState.sizes}>
+                    <DropDownSelect id="sizesInput" name="sizes" onChange={inputChange} value={formState.sizes}>
                         <DropDownOption value="">--Please choose a size--</DropDownOption>
                         <DropDownOption value="small">Small</DropDownOption>
                         <DropDownOption value="medium">Medium</DropDownOption>
                         <DropDownOption value="large">Large</DropDownOption>
                     </DropDownSelect>
                 </DropDownContainer>
+                {errors.sizes.length > 0 ? <p>{errors.sizes}</p> : null}
                 </Label>
                 <ToppingsTitle>Toppings</ToppingsTitle>
                 <ToppingsContainer>
-                    <Label htmlFor="pepperoni">
+                    <Label htmlFor="pepperoniInput">
                     Pepperoni
                     <Checkbox 
-                        id="pepperoni"
+                        id="pepperoniInput"
                         type="checkbox"
                         name="pepperoni"
                         checked={formState.pepperoni} 
                         onChange={inputChange} 
                     />
                     </Label>
-                    <Label htmlFor="sausage">
+                    <Label htmlFor="sausageInput">
                     Susage
                     <Checkbox 
-                        id="sausage"
+                        id="sausageInput"
                         type="checkbox"
                         name="sausage"
                         checked={formState.sausage} 
                         onChange={inputChange} 
                     />
                     </Label>
-                    <Label htmlFor="mushrooms">
+                    <Label htmlFor="mushroomsInput">
                     Mushrooms
                     <Checkbox 
-                        id="mushrooms"
+                        id="mushroomsInput"
                         type="checkbox"
                         name="mushrooms"
                         checked={formState.mushrooms} 
                         onChange={inputChange} 
                     />
                     </Label>
-                    <Label htmlFor="peppers">
+                    <Label htmlFor="peppersInput">
                     Peppers
                     <Checkbox 
-                        id="peppers"
+                        id="peppersInput"
                         type="checkbox"
                         name="peppers"
                         checked={formState.peppers} 
@@ -233,23 +236,25 @@ const Pizza = () => {
                     />
                     </Label>
                 </ToppingsContainer>
-                <Label htmlFor="name">Name
+                <Label htmlFor="nameInput">Name
                     <Input 
-                        id="label" 
+                        id="nameInput" 
                         name="name" 
                         onChange={inputChange} 
                         value={formState.name}
                     />
+                {errors.name.length > 0 ? <p>{errors.name}</p> : null}
                 </Label>
-                <Label htmlFor="special_instructions">Special-Instructions
+                <Label htmlFor="special_instructionsInput">Special-Instructions
                     <SpecialInstructions
-                        id="special_instructions"
+                        id="special_instructionsInput"
                         name="special_instructions"
                         onChange={inputChange} 
                         value={formState.special_instructions}
                     />
+                {errors.special_instructions.length > 0 ? <p>{errors.special_instructions}</p> : null}
                 </Label>
-                <Button primary>Primary</Button>
+                <Button disabled={buttonDisabled} primary>Primary</Button>
             </FormGroup>
         </Form>
     </div>
