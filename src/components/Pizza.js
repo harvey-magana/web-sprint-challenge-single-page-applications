@@ -94,6 +94,7 @@ const Pizza = () => {
         special_instructions: ''
     })
 
+    console.log(formState)
     const [ pizzas, setPizzas ] = useState([])
 
     const [ errors, setErrors ] = useState({
@@ -104,6 +105,24 @@ const Pizza = () => {
         terms: ''
     });
 
+    const validateChange = (e) => {
+        yup
+            .reach(formSchema, e.target.name)
+            .validate(e.target.value)
+            .then((valid) => {
+                setErrors({
+                    name: event.target.value,
+                    [e.target.name]: ""
+                });
+            })
+            .catch((err) => {
+                setErrors({
+                    name: event.target.value,
+                    [e.target.name]: err.errors[0]
+                });
+            });
+    }
+
     const inputChange = (e) => {
         e.persist();
         const newFormData = {
@@ -111,7 +130,7 @@ const Pizza = () => {
             [e.target.name]: e.target.type === "checkbox" ? e.target.checked : e.target.value 
         }
 
-        //validation will go here...
+        validateChange(e);
         setFormState(newFormData);
     }
 
@@ -135,6 +154,19 @@ const Pizza = () => {
             })
             .catch((err) => console.log(err.response));
     }
+    
+    useEffect(() => {
+        formSchema.isValid(formState).then((isValid) => {
+            setButtonDisabled(!isValid)
+        });
+    }, [formState])
+    
+    const formSchema = yup.object().shape({
+        name: yup
+            .string()
+            .min(2, "Passwords must be at least 2 characters long.")
+            .required()
+      });
 
   return (
     <div className="App">
@@ -149,7 +181,7 @@ const Pizza = () => {
             <FormGroup>
             <Label htmlFor="sizes">Pizza Sizes
                 <DropDownContainer>
-                    <DropDownSelect id="sizes" name="sizes" onChange={inputChange}>
+                    <DropDownSelect id="sizes" name="sizes" onChange={inputChange} value={formState.sizes}>
                         <DropDownOption value="">--Please choose a size--</DropDownOption>
                         <DropDownOption value="small">Small</DropDownOption>
                         <DropDownOption value="medium">Medium</DropDownOption>
@@ -165,8 +197,8 @@ const Pizza = () => {
                         id="pepperoni"
                         type="checkbox"
                         name="pepperoni"
+                        checked={formState.pepperoni} 
                         onChange={inputChange} 
-                        value={formState.pepperoni}
                     />
                     </Label>
                     <Label htmlFor="sausage">
@@ -175,8 +207,8 @@ const Pizza = () => {
                         id="sausage"
                         type="checkbox"
                         name="sausage"
+                        checked={formState.sausage} 
                         onChange={inputChange} 
-                        value={formState.sausage}
                     />
                     </Label>
                     <Label htmlFor="mushrooms">
@@ -185,8 +217,8 @@ const Pizza = () => {
                         id="mushrooms"
                         type="checkbox"
                         name="mushrooms"
+                        checked={formState.mushrooms} 
                         onChange={inputChange} 
-                        value={formState.mushrooms}
                     />
                     </Label>
                     <Label htmlFor="peppers">
@@ -195,6 +227,7 @@ const Pizza = () => {
                         id="peppers"
                         type="checkbox"
                         name="peppers"
+                        checked={formState.peppers} 
                         onChange={inputChange} 
                         value={formState.peppers}
                     />
