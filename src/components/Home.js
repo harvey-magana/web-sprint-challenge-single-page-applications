@@ -7,7 +7,7 @@ import Content from "./Content";
 
 const Home = () => {
   return (
-    <div>
+    <div className="App">
         <Header />
         <HomeImg />
         <Content />
